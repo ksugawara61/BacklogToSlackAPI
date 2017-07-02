@@ -25,13 +25,23 @@ $ bundle exec rspec spec/hello_spec.rb
 ```
 $ export SLACK_API_TOKEN="xoxp-XXXXXXXXXXXXXXXXXXXXXXXXXXXX" # API TOKEN of Slack
 $ export SLACK_CHANNEL="#backlog-slack"
-$ SLACK_BOT_USERNAME="Backlog"
+$ export SLACK_BOT_USERNAME="Backlog"
 ```
 
 ## How to Run
 
 ```
 $ bundle exec rackup -o 0.0.0.0 -p 8080
+```
+
+## Deploy heroku
+
+```
+$ heroku create backlog-to-slack-api
+$ heroku config:set SLACK_API_TOKEN=xoxp-XXXXXXXXXXXXXXXXXXXXXXXXXXXX" # API TOKEN of Slack
+$ heroku config:set SLACK_CHANNEL=#backlog-slack
+$ heroku config:set SLACK_BOT_USERNAME=Backlog
+$ git push heroku master
 ```
 
 ## References

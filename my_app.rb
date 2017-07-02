@@ -14,6 +14,8 @@ class MyApp < Sinatra::Base
     tmp = request.body.read
     params = JSON.parse tmp
 
+    puts params
+
     params.each do |param|
       project       = param['project']
       type          = param['type']

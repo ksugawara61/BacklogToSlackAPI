@@ -38,13 +38,13 @@ class MyApp < Sinatra::Base
     when 2,3
       text += "*課題の更新*\n"
     when 4
-      text += "*課題のコメント*\n"
+      text += "*課題の削除*\n"
     end
 
     # Slackに通知する内容を追記
     text += '[' + project['projectKey'] + '-' + content['key_id'].to_s +
       '] - ' + content['summary'] + ' by ' + createdUser['name']
-    if content['comment']['content']
+    if content.has_key?('comment')
       text += "\n" + content['comment']['content']
     end
 

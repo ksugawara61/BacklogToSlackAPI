@@ -11,14 +11,35 @@ class MyApp < Sinatra::Base
   end
 
   post '/backlog' do
-    response = HTTP.post("https://slack.com/api/chat.postMessage", params: {
-                           token: ENV['SLACK_API_TOKEN'],
-                           channel: ENV['SLACK_CHANNEL'],
-                           text: "@katsuya hello world!",
-                           username: ENV['SLACK_BOT_USERNAME']
-                         })
+    tmp = request.body.read
+    params = JSON.parse tmp
 
-    JSON.pretty_generate(JSON.parse(response.body))
+    params.each do |param|
+      project     = param['project']
+      content     = param['content']
+      createdUser = param['createdUser']
+
+      text = '[' + project['projectKey'] + '-' + content['key_id'].to_s +
+        '] - ' + content['summary'] + ' by ' + createdUser['name']
+      if content['comment']['content']
+        text += "\n" + content['comment']['content']
+      end
+
+      response = HTTP.post("https://slack.com/api/chat.postMessage", params: {
+                             token:    ENV['SLACK_API_TOKEN'],
+                             channel:  ENV['SLACK_CHANNEL'],
+                             text:     text,
+                             username: ENV['SLACK_BOT_USERNAME']
+                           })
+
+    end
+
+    status = {
+      'status'  => 'success',
+      'message' => ''
+    }
+
+    JSON.pretty_generate(status)
   end
 
 end

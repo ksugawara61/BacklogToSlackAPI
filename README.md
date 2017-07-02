@@ -20,6 +20,14 @@ $ bundle exec rspec spec
 $ bundle exec rspec spec/hello_spec.rb
 ```
 
+## Initial Setting
+
+```
+$ export SLACK_API_TOKEN="xoxp-XXXXXXXXXXXXXXXXXXXXXXXXXXXX" # API TOKEN of Slack
+$ export SLACK_CHANNEL="#backlog-slack"
+$ SLACK_BOT_USERNAME="Backlog"
+```
+
 ## How to Run
 
 ```

@@ -42,8 +42,9 @@ class MyApp < Sinatra::Base
     end
 
     # Slackに通知する内容を追記
-    text += '[' + project['projectKey'] + '-' + content['key_id'].to_s +
-      '] - ' + content['summary'] + ' by ' + createdUser['name']
+    text += '[' + project['projectKey'] + '-' + content['key_id'].to_s + '] - '
+    text += content['summary'] if content.has_key?('summary')
+    text += ' by ' + createdUser['name']
     if content.has_key?('comment')
       text += "\n" + content['comment']['content']
     end

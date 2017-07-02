@@ -12,9 +12,10 @@ class MyApp < Sinatra::Base
 
   post '/backlog' do
     tmp = request.body.read
-    params = JSON.parse tmp
 
-    puts params
+    puts tmp
+
+    params = JSON.parse tmp
 
     params.each do |param|
       project       = param['project']

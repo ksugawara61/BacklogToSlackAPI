@@ -37,6 +37,8 @@ class MyApp < Sinatra::Base
       text += "*課題の更新*\n"
     when 4
       text += "*課題の削除*\n"
+    else
+      return nil
     end
 
     # 課題ID

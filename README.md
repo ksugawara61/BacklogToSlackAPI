@@ -38,6 +38,7 @@ $ bundle exec rackup -o 0.0.0.0 -p 8080
 
 ```
 $ heroku create backlog-to-slack-api
+$ heroku config:set BACKLOG_HOST=xxx.backlog.jp
 $ heroku config:set SLACK_API_TOKEN=xoxp-XXXXXXXXXXXXXXXXXXXXXXXXXXXX" # API TOKEN of Slack
 $ heroku config:set SLACK_CHANNEL=#backlog-slack
 $ heroku config:set SLACK_BOT_USERNAME=Backlog

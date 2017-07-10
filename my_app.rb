@@ -39,13 +39,21 @@ class MyApp < Sinatra::Base
       text += "*課題の削除*\n"
     end
 
+    # 課題ID
+    issue_id = project['projectKey'] + '-' + content['key_id'].to_s
+
+    # URLを設定
+    url = 'https://' + ENV['BACKLOG_HOST'] + '/view/' + issue_id
+
     # Slackに通知する内容を追記
-    text += '[' + project['projectKey'] + '-' + content['key_id'].to_s + '] - '
+    text += '[' + issue_id + '] - '
     text += content['summary'] if content.has_key?('summary')
     text += ' by ' + createdUser['name']
     if content.has_key?('comment')
       text += "\n" + content['comment']['content']
+      url  += '#comment-' + content['comment']['id'].to_s
     end
+    text += "\n>" + url
 
     # Slack API通信
     response = HTTP.post("https://slack.com/api/chat.postMessage", params: {
